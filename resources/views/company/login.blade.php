@@ -41,6 +41,12 @@
         .btn-login:hover {
             background-color: #2e59d9;
         }
+        .forgot-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -69,6 +75,11 @@
 
                 <button type="submit" class="btn btn-primary btn-login">Login</button>
             </form>
+
+            <!-- Forgot Password Button -->
+            <a href="{{ route('company.forgot.password') }}" class="forgot-link">
+                Forgot Password?
+            </a>
         </div>
     </div>
 </body>

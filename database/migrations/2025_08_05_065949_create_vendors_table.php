@@ -21,6 +21,8 @@ return new class extends Migration
             $table->boolean('is_verified')->nullable();
             $table->text('comments')->nullable();
             $table->timestamps();
+            $table->string('status')->default('pending');
+
 
         });
     }

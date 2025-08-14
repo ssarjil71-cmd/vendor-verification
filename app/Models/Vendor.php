@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vendor extends Model
 {
-    // app/Models/Vendor.php
-
-protected $fillable = [
-    'name',
-    'email',
-    'token',
-    'status',
-    'company_id', // make sure this is fillable
-];
-
+    protected $fillable = [
+        'name',
+        'email',
+        'token',
+        'status',
+        'form_filled',   // <-- yeh add kiya
+        'company_id',
+        'pan_number',
+        'aadhar_number',
+        'bank_account',
+        'ifsc_code',
+    ];
 }

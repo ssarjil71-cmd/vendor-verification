@@ -9,6 +9,8 @@
         <div style="color:red;">{{ $errors->first() }}</div>
     @endif
     <form method="POST" action="{{ route('admin.login.submit') }}">
+        <a href="{{ route('admin.password.request') }}">Forgot Password?</a>
+
         @csrf
         <div>
             <label>Email</label>

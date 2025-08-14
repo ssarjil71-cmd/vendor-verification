@@ -6,9 +6,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 class CompanyDashboardController extends Controller
 {
+    public function profile()
+    {
+        return view('company.profile');
+    }
+
    public function index()
     {
         $company = Auth::guard('company')->user();
@@ -54,6 +61,24 @@ class CompanyDashboardController extends Controller
         }
 
         return view('company.qr', compact('company'));
+    }
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:6|confirmed',
+        ]);
+
+        $company = Auth::guard('company')->user();
+
+        if (!Hash::check($request->current_password, $company->password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect.']);
+        }
+
+        $company->password = Hash::make($request->new_password);
+        $company->save();
+
+        return back()->with('success', 'Password changed successfully.');
     }
 
 

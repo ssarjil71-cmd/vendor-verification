@@ -81,6 +81,10 @@
                 <div class="d-grid">
                     <button type="submit" class="btn btn-custom">Login</button>
                 </div>
+              <div class="d-grid">
+                    <a href="{{ route('admin.password.request') }}">Forgot Password?</a>
+                    
+                </div>
             </form>
         </div>
     </div>
