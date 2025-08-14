@@ -119,12 +119,27 @@ Route::prefix('company')->name('company.')->group(function () {
         Route::get('/payment/qr', [CompanyDashboardController::class, 'showQr'])->name('payment.qr');
     });
     Route::get('/create-admin-temp', function() {
-    \App\Models\Admin::create([
-        'name' => 'New Admin',
-        'email' => 'newadmin@example.com',
-        'password' => bcrypt('password123')
-    ]);
-    return 'Admin created!';
+    try {
+        if (!class_exists(\App\Models\Admin::class)) {
+            return 'Admin model not found.';
+        }
+
+        // Check if admin already exists
+        if (\App\Models\Admin::where('email', 'newadmin@example.com')->exists()) {
+            return 'Admin already exists!';
+        }
+
+        // Create admin
+        \App\Models\Admin::create([
+            'name' => 'New Admin',
+            'email' => 'newadmin@example.com',
+            'password' => bcrypt('password123')
+        ]);
+
+        return 'Admin created successfully!';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
 });
 
 });
