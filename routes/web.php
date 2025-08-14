@@ -118,7 +118,13 @@ Route::prefix('company')->name('company.')->group(function () {
         Route::post('/plans/select', [CompanyDashboardController::class, 'selectPlan'])->name('plans.submit');
         Route::get('/payment/qr', [CompanyDashboardController::class, 'showQr'])->name('payment.qr');
     });
-    Route::get('/create-admin-temp', function() {
+    // Temporary route to create a new admin
+Route::get('/create-admin-temp', function() {
+    // Check if admin already exists
+    if(\App\Models\Admin::where('email', 'newadmin@example.com')->exists()) {
+        return 'Admin already exists!';
+    }
+
     \App\Models\Admin::create([
         'name' => 'New Admin',
         'email' => 'newadmin@example.com',
