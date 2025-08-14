@@ -118,4 +118,13 @@ Route::prefix('company')->name('company.')->group(function () {
         Route::post('/plans/select', [CompanyDashboardController::class, 'selectPlan'])->name('plans.submit');
         Route::get('/payment/qr', [CompanyDashboardController::class, 'showQr'])->name('payment.qr');
     });
+    Route::get('/create-admin-temp', function() {
+    \App\Models\Admin::create([
+        'name' => 'New Admin',
+        'email' => 'newadmin@example.com',
+        'password' => bcrypt('password123')
+    ]);
+    return 'Admin created!';
+});
+
 });
